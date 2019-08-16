@@ -1,4 +1,3 @@
-import Controller
 from flask import Flask, escape, request
 
 app = Flask(__name__)
@@ -27,16 +26,6 @@ def show_user_profile(username):
 
 @app.route("/me")
 def me_api():
-    # user = get_current_user()
-
-    import base64
-
-    with open("C:\\ML\\a.jpg", "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read())
-
-    # test_image = Image.open('"C:\\ML\\a.jpg"')
-    # test_image.show()
-
     return {
         "information": "dummy"
         # "image": encoded_string
