@@ -1,11 +1,20 @@
+import base64
+import json
+import os
+from typing import Optional, Dict, List, Any, Union
+
+import matplotlib.pyplot as plt
+
 from flask import Flask, escape, request
+
+from bcdp_test import predict_cancer
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def hello():
-    return 'Welcome!'
+    return "Welcome"
 
 
 @app.route('/projects/')
@@ -15,7 +24,7 @@ def projects():
 
 @app.route('/about')
 def about():
-    return 'The about page'
+    return app.send_static_file('Client.html')
 
 
 @app.route('/user/<username>')
@@ -24,16 +33,24 @@ def show_user_profile(username):
     return 'User %s' % escape(username)
 
 
-@app.route("/me")
+@app.route('/me', methods=['POST'])
 def me_api():
-    return {
-        "information": "dummy"
-        # "image": encoded_string
+    # received_file = request.form['data']
 
-        # "username": user.username,
-        # "theme": user.theme,
-        # "image": url_for("user_image", filename=user.image),
-    }
+    f = request.files['data']
+    f.save('test_images/uploaded_file.jpg')
+
+    result = predict_cancer('uploaded_file.jpg')
+    return result
+
+    # return {
+    # "information": "dummy"
+    # "image": encoded_string
+
+    # "username": user.username,
+    # "theme": user.theme,
+    # "image": url_for("user_image", filename=user.image),
+    # }
 
 
 if __name__ == "__main__":
