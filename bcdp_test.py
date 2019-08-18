@@ -1,9 +1,8 @@
 # test.py
-
 import os
 import tensorflow as tf
-import numpy as np
 import cv2
+import numpy as np
 
 # module-level variables ##############################################################################################
 RETRAINED_LABELS_TXT_FILE_LOC = os.getcwd() + "/" + "retrained_labels.txt"
@@ -22,7 +21,7 @@ def predict_cancer(filename):
     # get a list of classifications from the labels file
     classifications = []
     # for each line in the label file . . .
-    for currentLine in tf.io.gfile.GFile(RETRAINED_LABELS_TXT_FILE_LOC):
+    for currentLine in tf.gfile.GFile(RETRAINED_LABELS_TXT_FILE_LOC):
         # remove the carriage return
         classification = currentLine.rstrip()
         # and append to the list
@@ -35,14 +34,14 @@ def predict_cancer(filename):
     # load the graph from file
     with tf.gfile.FastGFile(RETRAINED_GRAPH_PB_FILE_LOC, 'rb') as retrainedGraphFile:
         # instantiate a GraphDef object
-        graphDef = tf.compat.v1.GraphDef()
+        graphDef = tf.GraphDef()
         # read in retrained graph into the GraphDef object
         graphDef.ParseFromString(retrainedGraphFile.read())
         # import the graph into the current default Graph, note that we don't need to be concerned with the return value
         _ = tf.import_graph_def(graphDef, name='')
     # end with
 
-    with tf.compat.v1.Session() as sess:
+    with tf.Session() as sess:
         # for each file in the test images directory . . .
 
         # attempt to open the image with OpenCV
@@ -143,9 +142,7 @@ def main():
         print("---------------------------------------")
     # end for
 
-
 # end main
 #######################################################################################################################
-
 if __name__ == "__main__":
     main()

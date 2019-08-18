@@ -1,10 +1,3 @@
-import base64
-import json
-import os
-from typing import Optional, Dict, List, Any, Union
-
-import matplotlib.pyplot as plt
-
 from flask import Flask, escape, request
 
 from bcdp_test import predict_cancer
@@ -22,8 +15,8 @@ def projects():
     return 'The project page'
 
 
-@app.route('/about')
-def about():
+@app.route('/client')
+def client():
     return app.send_static_file('Client.html')
 
 
