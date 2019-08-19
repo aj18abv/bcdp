@@ -33,8 +33,8 @@ def me_api():
     f = request.files['data']
     f.save('test_images/uploaded_file.jpg')
 
-    # result = predict_cancer('uploaded_file.jpg')
-    # return result
+    result = predict_cancer('uploaded_file.jpg')
+    return result
 
     # return {
     # "information": "dummy"
