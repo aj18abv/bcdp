@@ -1,6 +1,6 @@
 from flask import Flask, escape, request
 
-# from bcdp_test import predict_cancer
+from bcdp_test import predict_cancer
 
 app = Flask(__name__)
 
@@ -32,17 +32,13 @@ def me_api():
     f = request.files['data']
     f.save('test_images/uploaded_file.jpg')
 
-    # result = predict_cancer('uploaded_file.jpg')
-    # return result
+    result = predict_cancer('uploaded_file.jpg')
+    return result
 
-    return {
-    "information": "dummy",
-    "image": "saved"
-
-    # "username": user.username,
-    # "theme": user.theme,
-    # "image": url_for("user_image", filename=user.image),
-    }
+    # return {
+    # "information": "dummy",
+    # "image": "saved"
+    # }
 
 
 if __name__ == "__main__":
