@@ -1,6 +1,6 @@
 from flask import Flask, escape, request
 
-from bcdp_test import predict_cancer
+# from bcdp_test import predict_cancer
 
 app = Flask(__name__)
 
