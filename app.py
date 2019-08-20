@@ -28,22 +28,21 @@ def show_user_profile(username):
 
 @app.route('/me', methods=['POST'])
 def me_api():
-    # received_file = request.form['data']
 
     f = request.files['data']
     f.save('test_images/uploaded_file.jpg')
 
-    result = predict_cancer('uploaded_file.jpg')
-    return result
+    # result = predict_cancer('uploaded_file.jpg')
+    # return result
 
-    # return {
-    # "information": "dummy"
-    # "image": encoded_string
+    return {
+    "information": "dummy",
+    "image": "saved"
 
     # "username": user.username,
     # "theme": user.theme,
     # "image": url_for("user_image", filename=user.image),
-    # }
+    }
 
 
 if __name__ == "__main__":
